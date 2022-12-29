@@ -6,20 +6,21 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "auto_user")
+@Table(name = "price_history")
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class User {
+public class PriceHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int id;
+    private long before;
+    private long after;
     @EqualsAndHashCode.Include
-    private String login;
-    private String password;
-
+    private LocalDateTime created;
 }
