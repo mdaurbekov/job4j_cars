@@ -17,17 +17,29 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Post {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private int id;
+
     @EqualsAndHashCode.Include
     private String desc;
     private LocalDateTime created;
+
     @ManyToOne
     @JoinColumn(name = "auto_user_id")
     private User user;
+
+    @ManyToMany
+    @JoinTable(
+            name = "participates",
+            joinColumns = {@JoinColumn(name = "auto_post_id")},
+            inverseJoinColumns = {@JoinColumn(name = "auto_user_id")}
+    )
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "auto_post_id")
     private List<PriceHistory> history = new ArrayList<>();
+
 }
